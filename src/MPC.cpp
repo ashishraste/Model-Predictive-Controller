@@ -8,11 +8,8 @@ using CppAD::AD;
 size_t N = 10;
 double dt = 0.1;
 
-// NOTE: feel free to play around with this
-// or do something completely different
+// Reference velocity below which if the vehicle goes it is penalized.
 double ref_v = 100;
-double ref_cte = 0.;
-double ref_epsi = 0.;
 
 // The solver takes all the state variables and actuator
 // variables in a singular vector. Thus, we should to establish
@@ -40,8 +37,8 @@ class FG_eval {
 
     // Cost based on state.
     for (unsigned int i=0; i < N; ++i) {
-      fg[0] += 1000 * CppAD::pow(vars[cte_start+i] - ref_cte, 2);
-      fg[0] += 1000 * CppAD::pow(vars[epsi_start+i] - ref_epsi, 2);
+      fg[0] += 1000 * CppAD::pow(vars[cte_start+i], 2);
+      fg[0] += 1000 * CppAD::pow(vars[epsi_start+i], 2);
       fg[0] += CppAD::pow(vars[v_start+i] - ref_v, 2);
     }
 
@@ -206,9 +203,10 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   // Check some of the solution values
   ok &= solution.status == CppAD::ipopt::solve_result<Dvector>::success;
 
+  //// DEBUG
   // Cost
-//  auto cost = solution.obj_value;
-//  std::cout << "Cost " << cost << std::endl;
+  // auto cost = solution.obj_value;
+  // std::cout << "Cost " << cost << std::endl;
 
   // Return actuator values for the next time-step.
   vector<double> result;

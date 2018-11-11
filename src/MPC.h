@@ -4,7 +4,7 @@
 #include <vector>
 #include "Eigen-3.3/Eigen/Core"
 
-#define Lf 2.67;
+#define Lf 2.67
 
 using namespace std;
 
