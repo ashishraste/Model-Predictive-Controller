@@ -97,7 +97,8 @@ In this project we pick the horizon duration to be for 1 second i.e. the
 optimizer will keep adjusting the predicted trajectory every other second, which
 is reasonable given the speed we're aiming for the vehicle's travel: ~55 mph.
 For 1 second horizon, we choose number of timesteps N=10 and and time-interval
-dt=0.1 seconds.
+dt=0.1 seconds. Other parameter values of N=20 and dt=0.05 seemed to drive the
+vehicle a bit less smooth than N=10 and dt=0.1.
 
 ### MPC preprocessing and Polynomial fitting
 
