@@ -125,7 +125,7 @@ int main() {
           double psi_d = psi0 - (v * delta * delay / Lf);
           double v_d = v + a * delay;
           double cte_d = cte0 + (v * sin(epsi0) * delay);
-          double epsi_d = epsi0 - (v * atan(coeffs[1]) * delay / Lf);
+          double epsi_d = epsi0 - (v * delta * delay / Lf);
 
           // State vector.
           Eigen::VectorXd state(6);
